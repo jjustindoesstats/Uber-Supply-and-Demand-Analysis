@@ -65,6 +65,35 @@ where `Unique Drivers` != 0;
 
 
 
+#In drafting a driver schedule in terms of 8 hours shifts, when are the busiest 8 consecutive hours over the two week period in terms of unique requests?
+alter table uber_data
+add ID int not null auto_increment key;
+
+#True or False: Driver supply always increases when demand increases during the two week period? y=Driver Supply and requests = x
+#First we should group the 
+
+select max(`Unique Drivers`) , Requests
+from uber_data
+group by Requests
+order by Requests;
+
+#From this query I already get the suspiscion thats its False
+#We can use a self join and check for negative values given a sinlge increase in requests
+
+select distinct u1.Requests as requests_1, u2.Requests as requests_2, u1.`Unique Drivers` - u2.`Unique Drivers` as increase_in_drivers
+from uber_data u1 , uber_data u2
+where u1.requests - u2.requests =1 and  u1.`Unique Drivers` - u2.`Unique Drivers`<0
+;
+
+#We see plenty of negative values given a one increase
+#So we can concluse False
+#Visulaize in Python
+
+
+
+
+
+                              
 
 
 
